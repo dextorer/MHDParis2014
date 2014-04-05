@@ -101,10 +101,13 @@ def getTracks(sentence):
 		trackInfo['subtitle'] = txt[0]
 		trackSubtitles.append(trackInfo)
 	#print cnt
+	token_result = {}
+	token_result['token'] = sentence
+	token_result['token_output'] = trackSubtitles
 	filehandle = open(outputFile,'w')
 	json.dump(trackSubtitles, filehandle)
 	filehandle.close()
-	return (trackSubtitles)#,response)
+	return (token_result)#,response)
 
 if __name__ == "__main__":
 	os.system("clear")
