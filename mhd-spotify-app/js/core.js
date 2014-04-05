@@ -20,13 +20,21 @@ var currentId = 0;
 //Start
 function start() {
 	
-	//read data from textarea
+	// read data from textarea
 	var query = $('#query_txtarea').val();
 
 	// load spinner
+	$('.listenButton').addClass('loaded').empty().html('Wasting your time..');
 
   	// perform network call
 	$.get(endpoint + '?q=' + query, function(data,status) {
+
+		// simulate some work
+		setTimeout(function() {}, 2000);
+
+		// switch content
+		window.location.href = "result.html";
+
     	var response = $.parseJSON(data);
     	console.log(response);
 		t = new Array();
