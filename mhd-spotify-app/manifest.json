@@ -36,7 +36,7 @@
       "http://api.musixmatch.com",
       "http://apic.musixmatch.com",
       "http://local.musixmatch.com",
-      "http://*.amazonaws.com",
+      "http://*.amazonaws.com"
     ],
   "SupportedLanguages": [
     "en"
