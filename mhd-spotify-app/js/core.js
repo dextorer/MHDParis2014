@@ -97,21 +97,31 @@ function startSpotyStuff(track, seeks, durations){
 		models.player.stop();
 		models.player.playTrack(track[current]);
 		models.player.seek(seeks[current]);
+
 	}	
 
 	stopSpotyStuff();
 	
 	looper = new Array();
-	looper[0] = setTimeout(function(){  SpotyTimed(currentId++) } , 0 );
+
 	var deltat = 0;
 	var j;
+
 	for(j=1; j<track.length; j++){
 		//document.write("Loop " + j+ " is " + track[j] + " <br>");
+		models.player.pause();
+		models.player.playTrack(track[currentId]);
+		models.player.pause();
+
 		looper[j] = setTimeout(function(){ SpotyTimed(currentId++) } , deltat + durations[j-1] );
 		//setTimeout(function() { t = track[j]; s = seeks[j]; SpotyTimed(t, s )}, deltat + durations[j-1]);
 		deltat = deltat + durations[j-1];
-	}
 
+	}
+	
+	//First
+	looper[0] = setTimeout(function(){  SpotyTimed(currentId++) } , 0 );
+	//Last close
 	looper [j] = setTimeout(function(){ models.player.stop();  }, deltat + durations[j-1] ); //kill the last
 }
 
