@@ -10,7 +10,7 @@ require(['$api/models'], function(myModels) {
 });
 
 //Endpoint
-var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/test_response.php';
+var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api.php';
 
 //SPOTYPLAYER
 var looper = new Array();
@@ -20,18 +20,20 @@ var currentId = 0;
 //Start
 function start() {
 	
+	//read data from textarea
+	var query = $('#query_txtarea').val();
+
 	// load spinner
 
   	// perform network call
-	$.get(endpoint, function(data,status) {
+	$.get(endpoint + '?q=' + query, function(data,status) {
     	var response = $.parseJSON(data);
-    	var result = response.result;
-
+    	console.log(response);
 		t = new Array();
 		s = new Array();
 		d = new Array();
 
-    	for (var i=0; i<result.length; i++) {
+    	/*for (var i=0; i<result.length; i++) {
     		var token_chunk = result[i].token_chunk;
     		var token_content = result[i].token_content;
     		
@@ -39,6 +41,14 @@ function start() {
     		t[i] = models.Track.fromURI(t[i]);
     		s[i] = parseInt(token_content[0].start_time);
     		d[i] = parseInt(token_content[0].duration);
+    	}*/
+
+		for (var i=0; i<response.length; i++) {
+    		t[i] = 'spotify:track:' + response[i].spotify_id;
+    		t[i] = models.Track.fromURI(t[i]);
+    		s[i] = parseInt(response[i].phrase_times) * 1000;
+    		// d[i] = parseInt(response.duration);
+    		d[i] = 4000;
     	}
 
 		startSpotyStuff(t,s,d);
