@@ -159,6 +159,10 @@ h2 {
 	margin-right: 15px;
 }
 
+.loaded:before {
+	background-image: url(../img/loader.gif);
+}
+
 .top-buttons {
 	margin-bottom: 20px;
 }
@@ -368,6 +372,10 @@ only screen and (min-device-pixel-ratio : 1.5) {
 	.replay:before {
 		background-image: url(../img/replay-icon@2x.png);
 		background-size: 20px 15px;
+	}
+
+	.loaded:before {
+		background-image: url(../img/loader.gif);
 	}
 
 }
