@@ -92,7 +92,7 @@ h2 {
 	background-color: rgba(255,255,255,1);
 }
 
-#sentenceWrap2 {
+.sentenceWrap2 {
 	position: absolute;
 	top: 15px;
 	right: 30px;
@@ -100,7 +100,7 @@ h2 {
 	bottom: 15px;	
 }
 
-#theSentence {
+.theSentence {
 	font-family: 'Roboto', sans-serif;
 	color: #4b4b4b;
 	font-size: 17px;
@@ -160,7 +160,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 		background-size: 960px 640px;
 	}
 
-	#theSentence {
+	.theSentence {
 		background-image: url(../img/txt-bg@2x.png);
 		background-size: 1px 35px;
 	}
