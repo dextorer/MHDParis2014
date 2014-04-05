@@ -39,32 +39,35 @@ body {
 	color: #fff;
 }
 
+body.result-page {
+	position: relative;
+}
+
 .overlay {
 	background: rgb(35,29,3);
-	background: -moz-linear-gradient(45deg,  rgba(35,29,3,1) 0%, rgba(29,88,115,1) 100%);
-	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(35,29,3,1)), color-stop(100%,rgba(29,88,115,1)));
-	background: -webkit-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
-	background: -o-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
-	background: -ms-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
-	background: linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#231d03', endColorstr='#1d5873',GradientType=1 );
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	opacity: .9;
-	z-index: 888;
+	background: linear-gradient(45deg,  rgba(35,29,3,.9) 0%,rgba(29,88,115,.9) 100%);
+	overflow: hidden;
+	min-height: 100%;
+}
+
+.result-page .overlay {
+	background: rgb(35,29,3);
+	background: linear-gradient(45deg,  rgba(35,29,3,.95) 0%,rgba(29,88,115,.95) 100%);
 }
 
 .wrapper {
 	z-index: 889;
 	position: relative;
 	text-align: center;
+	padding: 20px 0;
+}
+
+.result-page .wrapper {
+	padding-bottom: 0;
 }
 
 h1 {
-	margin-bottom: 0;
+	margin: 0;
 }
 
 h2 {
@@ -115,6 +118,10 @@ h2 {
 	height: 100%;
 }
 
+.listenButton, .replay, .start-over {
+	box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
 .listenButton {
 	display: inline-block;
 	border: none;
@@ -134,7 +141,7 @@ h2 {
 		-moz-transition-property: all; -moz-transition-duration: 0.3s;
 }
 
-.listenButton:hover {
+.listenButton:hover, .replay:hover {
 	border: none;
 	background: rgb(230,113,18);
 	background: linear-gradient(to bottom,  rgba(240,88,22,1) 0%,rgba(240,88,22,1) 100%);
@@ -149,6 +156,166 @@ h2 {
 	width: 25px;
 	height: 25px;
 	margin-right: 15px;
+}
+
+.top-buttons {
+	margin-bottom: 20px;
+}
+
+.replay {
+	display: inline-block;
+	border: none;
+	background: rgb(230,113,18);
+	background: linear-gradient(to bottom,  rgba(230,113,18,1) 0%,rgba(240,88,22,1) 100%);
+	color: #fff;
+	font-family: 'Proxima-Nova';
+	font-size: 20px;
+	letter-spacing: 1.3px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	cursor: pointer;
+	transition-property: all; transition-duration: 0.3s;
+	    -webkit-transition-property: all; -webkit-transition-duration: 0.3s;
+	    -o-transition-property: all; -o-transition-duration: 0.3s;
+		-moz-transition-property: all; -moz-transition-duration: 0.3s;
+}
+
+.replay:before {
+	background-image: url(../img/play-icon.png);
+	background-repeat: no-repeat;
+	content: '';
+	display: block;
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+}
+
+.start-over {
+	display: inline-block;
+	border: none;
+	background: rgb(38,92,115);
+	background: linear-gradient(to bottom,  rgba(38,92,115,1) 0%,rgba(32,81,102,1) 100%);
+	color: #fff;
+	font-family: 'Proxima-Nova';
+	font-size: 20px;
+	letter-spacing: 1.3px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	cursor: pointer;
+	margin-right: 15px;
+	transition-property: all; transition-duration: 0.3s;
+	    -webkit-transition-property: all; -webkit-transition-duration: 0.3s;
+	    -o-transition-property: all; -o-transition-duration: 0.3s;
+		-moz-transition-property: all; -moz-transition-duration: 0.3s;
+}
+
+.start-over:before {
+	background-image: url(../img/play-icon.png);
+	background-repeat: no-repeat;
+	content: '';
+	display: block;
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin-right: 15px;
+}
+
+.start-over:hover {
+	border: none;
+	background: rgb(38,92,115);
+	background: linear-gradient(to bottom,  rgba(32,81,102,1) 0%,rgba(32,81,102,1) 100%);
+}
+
+.lyrics-container {
+	height: 140px;
+	overflow: hidden;
+	position: relative;
+	margin: 50px 0;
+}
+
+.lyrics-container p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 32px;
+	opacity: .5;
+	font-weight: 300;
+	line-height: 70px;
+	padding: 0;
+	margin: 5px 0;
+}
+
+.lyrics-container .selected {
+	background-color: rgba(0,0,0,.5);
+	font-weight: 500;
+	font-size: 36px;
+	opacity: 1;
+}
+
+.lyrics-container .synced-lyrics {
+	position: absolute;
+	top: -80px;
+	left: 0;
+	right: 0;
+}
+
+.second-title {
+	font-family: 'Proxima-Nova-bold';
+	font-size: 20px;
+	text-transform: uppercase;
+	display: inline-block;
+	position: relative;
+	line-height: 31px;
+}
+
+.second-title span {
+	background-color: rgba(255,255,255,.8);
+	height: 2px;
+	position: absolute;
+	left: 5px;
+	right: 5px;
+	bottom: 0;
+}
+
+.songs-list {
+	background-color: rgba(0,0,0,.6);
+	overflow: hidden;
+}
+
+.song {
+	width: 25%;
+	float: left;
+	position: relative;
+}
+
+.song .overlay-cover {
+	background: rgb(0,0,0,.5);
+	background: linear-gradient(to bottom,  rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 100%);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 10px;
+}
+
+.song-title {
+	font-family: 'Proxima-Nova-bold';
+	font-size: 20px;
+	letter-spacing: 1px;
+	margin: 0;
+	padding: 0;
+}
+
+.artist-name {
+	color: rgba(255,255,255,.7);
+	font-size: 16px;
+	letter-spacing: .5px;
+	padding: 0;
+	margin: 0;
+}
+
+.song img {
+	max-width: 100%;
 }
 
 /* Retina display ----------- */
