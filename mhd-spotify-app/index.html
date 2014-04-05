@@ -3,17 +3,22 @@
     <head>
         <title>Talkify - Spotify app</title>
         <link rel="stylesheet" href="css/screen.css" type="text/css">
-        <script src="/js/jquery-2.1.0.js"></script>
-        <script src="/js/core.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="overlay"></div>
-        <!-- <div>
-            This is a test app! Playing song - spotify:track:3TKt9EoDMmKvNYpk1e6GkI
+        <div class="wrapper">
+            <h1><img src="img/logo@2x.png" alt="Talkify" width="242px" /></h1>
+            <h2>Write a sentence and listen it singing by different artists</h2>
+            <form class="sentenceForm">
+                <div class="sentenceWrap">
+                    <div class="sentenceWrap2">
+                        <textarea class="theSentence"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="listenButton" onclick="start()">Listen now</button>
+            </form>
         </div>
-
-        <textarea id="txtarea">diocane</textarea>
-         --><!-- <button id="mButton" onclick="start()">Butt-on</button> -->
     </body>
 
 </html>
