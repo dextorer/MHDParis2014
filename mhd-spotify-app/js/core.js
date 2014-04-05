@@ -3,7 +3,7 @@ var endpoint = 'https://raw.githubusercontent.com/mlegenhausen/node-ogone-direct
 function start() {
 	
 	// load spinner
-	var image = $('<img src="/img/spinner.gif" />'); // preload the spinner
+	// var image = $('<img src="/img/spinner.gif" />'); // preload the spinner
   	// $('#mButton').hide();
   	// $('#spinner').show();
 
@@ -11,7 +11,7 @@ function start() {
 	$.get(endpoint, function(data,status) {
     	// console.log(data);
     	var obj = $.parseJSON(data);
-    	// alert(obj.author);
+    	alert(obj.author);
 
 		// restore button
     	// $('#spinner').hide();
