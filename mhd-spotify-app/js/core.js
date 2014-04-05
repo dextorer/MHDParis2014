@@ -6,8 +6,15 @@ function start() {
 
   	// perform network call
 	$.get(endpoint, function(data,status) {
-    	var obj = $.parseJSON(data);
-    	alert(obj.author);
+    	var response = $.parseJSON(data);
+    	var result = response.result;
+    	for (var i=0; i<result.length; i++) {
+    		var token_chunk = result[i].token_chunk;
+    		var token_content = result[i].token_content;
+    		console.log(token_chunk);
+    		console.log(token_content);
+    	}
+
 
 		// restore button
     	// $('#spinner').hide();
