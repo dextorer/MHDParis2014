@@ -1,0 +1,45 @@
+{
+  "AppName": {
+    "en": "MHDParis2014"
+  },
+  "BundleIdentifier": "mhd",
+  "AppDescription": {
+    "en": "Music Hack Day @ Paris 2014"
+  },
+  "AppIcon": {
+    "18x18": "img/icons/icon-18x18.png",
+    "32x32": "img/icons/icon-32x32.png",
+    "64x64": "img/icons/icon-64x64.png",
+    "128x128": "img/icons/icon-128x128.png",
+    "300x300": "img/icons/icon-300x300.png"
+  },
+  "AcceptedLinkTypes": [],
+  "BundleType": "Application",
+  "BundleVersion": "0.2",
+  "DefaultTabs": [
+    {
+      "arguments": "index",
+      "title": {
+        "en": "Home"
+      }
+    }
+  ],
+  "Dependencies": {
+    "api": "1.38.0",
+    "views": "1.18.1"
+  },
+  "RequiredPermissions": [
+    
+      "https://*.musixmatch.com",
+      "http://*.musixmatch.com",
+      "https://tracking.musixmatch.com",
+      "http://api.musixmatch.com",
+      "http://apic.musixmatch.com",
+      "http://local.musixmatch.com",
+      "http://*.amazonaws.com",
+    ],
+  "SupportedLanguages": [
+    "en"
+  ],
+  "VendorIdentifier": "com.mhd2014"
+}

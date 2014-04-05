@@ -1,0 +1,35 @@
+body {
+	background-color: #000;
+	background-image: url(../img/bg.jpg);
+	background-repeat: repeat;
+}
+
+.overlay {
+	background: rgb(35,29,3);
+	background: -moz-linear-gradient(45deg,  rgba(35,29,3,1) 0%, rgba(29,88,115,1) 100%);
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(35,29,3,1)), color-stop(100%,rgba(29,88,115,1)));
+	background: -webkit-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
+	background: -o-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
+	background: -ms-linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
+	background: linear-gradient(45deg,  rgba(35,29,3,1) 0%,rgba(29,88,115,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#231d03', endColorstr='#1d5873',GradientType=1 );
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: .9;
+}
+
+
+/* Retina display ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+
+	body {
+		background-image: url(../img/bg@2x.jpg);
+		background-size: 960px 640px;
+	}
+
+}
