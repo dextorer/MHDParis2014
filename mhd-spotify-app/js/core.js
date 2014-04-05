@@ -29,17 +29,17 @@ function start() {
   	// perform network call
 	$.get(endpoint + '?q=' + query, function(data,status) {
 
-		// simulate some work
-		setTimeout(function() {}, 2000);
-
 		// switch content
-		window.location.href = "result.html";
+		$('.home-section').hide();
+		$('.result-section').show();
 
     	var response = $.parseJSON(data);
-    	console.log(response);
+    	// console.log(response);
 		t = new Array();
 		s = new Array();
 		d = new Array();
+		an = new Array();
+		ti = new Array();
 
     	/*for (var i=0; i<result.length; i++) {
     		var token_chunk = result[i].token_chunk;
@@ -51,13 +51,24 @@ function start() {
     		d[i] = parseInt(token_content[0].duration);
     	}*/
 
+		//$('.songs-list').append("<div class='song'><img src=" + cover_image + " class='cover' /><div class='overlay-cover'><p class='song-title'>" + song_title + "</p><p class='artist-name'>" + artist_name + "</p></div></div>");
+		//var song_width = 100 / songs_number + '%';
+		//$('.song').css( "width", song_width );
+
 		for (var i=0; i<response.length; i++) {
     		t[i] = 'spotify:track:' + response[i].spotify_id;
     		t[i] = models.Track.fromURI(t[i]);
     		s[i] = parseInt(response[i].phrase_times) * 1000;
+    		an[i] = response[i].artist;
+    		ti[i] = response[i].title;
     		// d[i] = parseInt(response.duration);
     		d[i] = 4000;
+
+    		$('.songs-list').append("<div class='song'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
     	}
+
+		var song_width = 100 / response.length + '%';
+		$('.song').css( "width", song_width );
 
 		startSpotyStuff(t,s,d);
 
