@@ -10,16 +10,37 @@
     <body>
         <div class="overlay">
             <div class="wrapper">
-                <h1><img src="img/logo@2x.png" alt="Talkify" width="242px" /></h1>
-                <h2>Write a sentence and listen it singing by different artists</h2>
-                <form class="sentenceForm">
-                    <div class="sentenceWrap">
-                        <div class="sentenceWrap2">
-                            <textarea class="theSentence"></textarea>
+                <div class="home-section">
+                    <h1><img src="img/logo@2x.png" alt="Talkify" width="242px" /></h1>
+                    <h2>Write a sentence and listen it singing by different artists</h2>
+                    <form class="sentenceForm">
+                        <div class="sentenceWrap">
+                            <div class="sentenceWrap2">
+                                <textarea id="query_txtarea" class="theSentence"></textarea>
+                            </div>
+                        </div>
+                        <a type="submit" class="listenButton" onclick="start()">Listen now</a>
+                    </form>
+                </div>
+            </div>
+            <div class="result-section">
+                <div class="top-buttons">
+                        <a href="index.html" class="start-over">Start over</a>
+                        <a href="#" class="replay">Replay sentence</a>
+                    </div>
+                    <div class="lyrics-container">
+                        <div class="synced-lyrics">
+                            <p>And the sun came crashing in</p>             
+                            <p class="selected">Boy, you should know what you're falling for</p>
+                            <p>I howled at the moon with friends</p>
+                            <p>I be everywhere everybody know me</p>
                         </div>
                     </div>
-                    <a href="result.html" type="submit" class="listenButton">Listen now</a>
-                </form>
+                    <div class="selected-songs">
+                        <h2 class="second-title">Selected songs<span></span></h2>
+                        <div class="songs-list"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
