@@ -1,29 +1,3 @@
-var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/test_response.php';
-
-function start() {
-	
-	// load spinner
-
-  	// perform network call
-	$.get(endpoint, function(data,status) {
-    	var response = $.parseJSON(data);
-    	var result = response.result;
-    	for (var i=0; i<result.length; i++) {
-    		var token_chunk = result[i].token_chunk;
-    		var token_content = result[i].token_content;
-    		console.log(token_chunk);
-    		console.log(token_content);
-    	}
-
-
-		// restore button
-    	// $('#spinner').hide();
-    	// $('#mButton').show();
-
-	},'html');
-};
-
-
 //###############################################################################################
 //################################## SPOTY STUFF  ###############################################
 //###############################################################################################
@@ -35,12 +9,54 @@ require(['$api/models'], function(myModels) {
 	models = myModels;
 });
 
+//Endpoint
+var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/test_response.php';
 
 //SPOTYPLAYER
 var looper = new Array();
 var currentId = 0;
 
-function test(){
+
+//Start
+function start() {
+	
+	// load spinner
+
+  	// perform network call
+	$.get(endpoint, function(data,status) {
+    	var response = $.parseJSON(data);
+    	var result = response.result;
+
+		t = new Array();
+		s = new Array();
+		d = new Array();
+
+    	for (var i=0; i<result.length; i++) {
+    		var token_chunk = result[i].token_chunk;
+    		var token_content = result[i].token_content;
+    		
+    		t[i] = token_content[0].spotify_id;
+    		console.log('spotify id ' + token_content[0].spotify_id);
+    		// s[i] = parseInt(token_content[0].start_time);
+    		s[i] = 53000;
+    		console.log('start time ' + token_content[0].start_time);
+    		// d[i] = parseInt(token_content[0].duration);
+    		d[i] = 3000;
+    		console.log('duration ' + token_content[0].duration);
+    	}
+
+		models.player.playTrack(t[0]);
+
+		// startSpotyStuff(t,s,d);
+
+		// restore button
+    	// $('#spinner').hide();
+    	// $('#mButton').show();
+
+	},'html');
+}
+
+/*function test(){
 			//var album = models.Album.fromURI('spotify:album:2mCuMNdJkoyiXFhsQCLLqw');
 			//models.player.playContext(album);
 		
@@ -65,7 +81,7 @@ function test(){
 				//document.write("Duration " + i + " is: " + d[i]  + "<br>");
 			}
 			startSpotyStuff(t,s,d);
-}
+}*/
 
 
 function startSpotyStuff(track, seeks, durations){
@@ -73,7 +89,7 @@ function startSpotyStuff(track, seeks, durations){
 	function SpotyTimed(current){
 
 		//models.player.stop();
-		//document.write(document.body. + "Playing " + track[current] + " starting from " + seeks[current] + "<br>");
+		console.log("Playing " + track[current] + " starting from " + seeks[current]);
 		models.player.stop();
 		models.player.playTrack(track[current]);
 		models.player.seek(seeks[current]);
