@@ -36,18 +36,12 @@ function start() {
     		var token_content = result[i].token_content;
     		
     		t[i] = token_content[0].spotify_id;
-    		console.log('spotify id ' + token_content[0].spotify_id);
-    		// s[i] = parseInt(token_content[0].start_time);
-    		s[i] = 53000;
-    		console.log('start time ' + token_content[0].start_time);
-    		// d[i] = parseInt(token_content[0].duration);
-    		d[i] = 3000;
-    		console.log('duration ' + token_content[0].duration);
+    		t[i] = models.Track.fromURI(t[i]);
+    		s[i] = parseInt(token_content[0].start_time);
+    		d[i] = parseInt(token_content[0].duration);
     	}
 
-		models.player.playTrack(t[0]);
-
-		// startSpotyStuff(t,s,d);
+		startSpotyStuff(t,s,d);
 
 		// restore button
     	// $('#spinner').hide();
