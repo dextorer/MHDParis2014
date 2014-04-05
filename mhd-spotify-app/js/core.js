@@ -1,15 +1,11 @@
-var endpoint = 'https://raw.githubusercontent.com/mlegenhausen/node-ogone-directlink/master/package.json';
+var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/test_response.php';
 
 function start() {
 	
 	// load spinner
-	// var image = $('<img src="/img/spinner.gif" />'); // preload the spinner
-  	// $('#mButton').hide();
-  	// $('#spinner').show();
 
   	// perform network call
 	$.get(endpoint, function(data,status) {
-    	// console.log(data);
     	var obj = $.parseJSON(data);
     	alert(obj.author);
 
