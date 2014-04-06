@@ -129,8 +129,8 @@ function startSpotyStuff(track, seeks, durations){
 		//models.player.stop();
 		console.log("Playing " + track[current] + " starting from " + seeks[current]);
 		models.player.stop();
-		models.player.playTrack(track[current]);
-		models.player.seek(seeks[current]);
+		models.player.playTrack(track[current], seeks[current], durations[current]);
+		//models.player.seek(seeks[current]);
 
 		// update current lyrics
 	}	

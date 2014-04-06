@@ -31,9 +31,12 @@ def getTracks(sentence):
 	url += "&q_lyrics=" + sent
 	url += "&quorum_factor=" + str(1)
 	url += "&f_has_lyrics=" + str(1)
-	url += "&s_artist_rating=" + 'desc'
+	#url += "&s_artist_rating=" + 'desc'
+	url += "&s_track_rating=" + 'desc'
 	url += "&f_lyrics_language=" + 'en'
 	url += "&page_size=" + str(100)
+	url += "&page=" + str(1)
+	url += "&g_commontrack=" + str(1)
 	#url +="&q_track=" + track_title
 	#url +="&q_artist=" + track_artist
 	#url +="&q_album=" + track_album
