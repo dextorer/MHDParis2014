@@ -69,7 +69,7 @@ function start() {
 
 	    		t[i] = 'spotify:track:' + current.spotify_id;
 	    		t[i] = models.Track.fromURI(t[i]);
-	    		s[i] = current.phrase_times * 1000 - 700;
+	    		s[i] = current.phrase_times * 1000;
 	    		d[i] = current.duration * 1000;
 	    		an[i] = current.artist;
 	    		ti[i] = current.title;
