@@ -258,7 +258,7 @@ h2 {
 
 .lyrics-container .synced-lyrics {
 	position: absolute;
-	margin-top: -80px;
+	margin-top: 0px;
 	left: 0;
 	right: 0;
 	transition-property: all; transition-duration: 0.3s;

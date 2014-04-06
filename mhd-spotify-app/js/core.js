@@ -41,6 +41,7 @@ function start() {
 		d = new Array();
 		an = new Array();
 		ti = new Array();
+		sub = new Array();
 
     	for (var i=0; i<result.length; i++) {
     		var token = result[i].token;
@@ -57,27 +58,19 @@ function start() {
     			}
     		}
 
+    		found = false;
+
     		t[i] = 'spotify:track:' + current.spotify_id;
     		t[i] = models.Track.fromURI(t[i]);
     		s[i] = current.phrase_times * 1000;
     		d[i] = current.duration * 1000;
     		an[i] = current.artist;
     		ti[i] = current.title;
+    		sub[i] = current.subtitle;
 
-    		$('.songs-list').append("<div class='song'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
+    		$('.songs-list').append("<div class='song blurred'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
+    		$('.synced-lyrics').append("<p>" + sub[i] + "</p>");
     	}
-
-		/*for (var i=0; i<response.length; i++) {
-    		t[i] = 'spotify:track:' + response[i].spotify_id;
-    		t[i] = models.Track.fromURI(t[i]);
-    		s[i] = parseInt(response[i].phrase_times) * 1000;
-    		an[i] = response[i].artist;
-    		ti[i] = response[i].title;
-    		// d[i] = parseInt(response.duration);
-    		d[i] = 4000;
-
-    		$('.songs-list').append("<div class='song'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
-    	}*/
 
 		var song_width = 100 / response.length + '%';
 		$('.song').css( "width", song_width );
@@ -117,7 +110,21 @@ function start() {
 
 function startSpotyStuff(track, seeks, durations){
 
+	// removing first song's blur
+	$('.songs-list').children().first().removeClass('blurred');
+	$('.synced-lyrics').children().first().addClass('selected');
+
 	function SpotyTimed(current){
+
+		if (current > 1) {
+			// update previous
+			$('.songs-list').children(':eq(' + current-1 + ')').removeClass('blurred');
+			$('.synced-lyrics').children(':eq(' + current-1 + ')').removeClass('selected');
+
+			// update current
+			$('.songs-list').children(':eq(' + current + ')').addClass('blurred');
+			$('.synced-lyrics').children(':eq(' + current + ')').addClass('selected');
+		}
 
 		//models.player.stop();
 		console.log("Playing " + track[current] + " starting from " + seeks[current]);
@@ -125,6 +132,7 @@ function startSpotyStuff(track, seeks, durations){
 		models.player.playTrack(track[current]);
 		models.player.seek(seeks[current]);
 
+		// update current lyrics
 	}	
 
 	stopSpotyStuff();
