@@ -88,17 +88,17 @@ def getTracks(sentence):
 		url += "&subtitle_format=mxm"
 		response = json.load( urllib2.urlopen( url ) )
 		
-		st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d %H:%M:%S')
+		#st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d %H:%M:%S')
 
-		headers = {
-			"DecibelAppID" : "88c41b55", 
-			"DecibelAppKey": "d03bc6ff966d2165db859479f46a20e7", 
-			"DecibelTimeStamp": st}
-		url = "http://rest.decibel.net/v2/albums"
-		params = {"ArtistName": "Muse"}
+		#headers = {
+		#	"DecibelAppID" : "88c41b55", 
+		#	"DecibelAppKey": "d03bc6ff966d2165db859479f46a20e7", 
+		#	"DecibelTimeStamp": st}
+		#url = "http://rest.decibel.net/v2/albums"
+		#params = {"ArtistName": "Muse"}
 
-		r = requests.get(url, headers=headers,params=params)
-		records = r.json()["ResultSet"]
+		#r = requests.get(url, headers=headers,params=params)
+		#records = r.json()["ResultSet"]
 		#for record in records:
 		#	print record["Title"]
 		
