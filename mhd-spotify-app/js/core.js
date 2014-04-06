@@ -129,8 +129,11 @@ function startSpotyStuff(track, seeks, durations){
 	
 	looper = new Array();
 
+    var initialSlack = 700;
 	var deltat = 0;
 	var j;
+
+
 
 	for(j=1; j<track.length; j++){
 		//document.write("Loop " + j+ " is " + track[j] + " <br>");
@@ -138,16 +141,16 @@ function startSpotyStuff(track, seeks, durations){
 		models.player.playTrack(track[currentId]);
 		models.player.pause();
 
-		looper[j] = setTimeout(function(){ SpotyTimed(currentId++) } , deltat + durations[j-1] );
+		looper[j] = setTimeout(function(){ SpotyTimed(currentId++) } , deltat + durations[j-1] + initialSlack );
 		//setTimeout(function() { t = track[j]; s = seeks[j]; SpotyTimed(t, s )}, deltat + durations[j-1]);
 		deltat = deltat + durations[j-1];
 
 	}
 	
 	//First
-	looper[0] = setTimeout(function(){  SpotyTimed(currentId++) } , 0 );
+	looper[0] = setTimeout(function(){  SpotyTimed(currentId++) } , initialSlack+0 );
 	//Last close
-	looper [j] = setTimeout(function(){ models.player.stop();  }, deltat + durations[j-1] ); //kill the last
+	looper [j] = setTimeout(function(){ models.player.stop();  }, deltat + durations[j-1] +initialSlack ); //kill the last
 }
 
 function stopSpotyStuff(){
