@@ -1,5 +1,14 @@
 "oh yeah, all right";spotify:track:0DiWol3AO6WpXZgp0goxAV
 "Hey, Are you all OK?";spotify:track:31U973mnOviVhT13gf1mEj
 "I don't know";spotify:track:1mzn6CQ71eUmgCSfbVmicN
-
+"Cause the future is now";spotify:track:0ntMUusjtZmLiUnA6TjjSx
+"This is the future";spotify:track:0ntMUusjtZmLiUnA6TjjSx
+"Light it up";spotify:track:0QCkYWRZo64iY71NxAvOU7
+"And it's over now";spotify:track:0QCkYWRZo64iY71NxAvOU7
+"Music's on";spotify:track:0QCkYWRZo64iY71NxAvOU7
+"Doint the right thing";spotify:track:5edBgVtRD0fvWk140Sl21T
+"May I have your attention please";spotify:track:1MYlx4dBtiyjn7K8YSyfzT
+"I love it";spotify:track:3VZQshi4COChhXaz7cLP02
+"I don't care";spotify:track:3VZQshi4COChhXaz7cLP02
+"So let it be done";spotify:track:3LM41UarpHPJkUZ7rVbbGx
 
