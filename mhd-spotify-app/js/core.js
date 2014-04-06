@@ -75,6 +75,10 @@ function start() {
 	    		sub[i] = current.subtitle;
 	    		ca[i] = current.coverart;
 
+	    		if (!ca[i]) {
+	    			ca[i] = "/img/cover.jpg";
+	    		}
+
 	    		$('.songs-list').append("<div class='song blurred'><img src=" + ca[i] + " class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
 	    		$('.synced-lyrics').append("<p>" + sub[i] + "</p>");
 	    	}

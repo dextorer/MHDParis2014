@@ -107,6 +107,7 @@ h2 {
 .theSentence {
 	font-family: 'Roboto', sans-serif;
 	color: #4b4b4b;
+	text-align: center;
 	font-size: 17px;
 	line-height: 35px;
 	background-color: transparent;
@@ -342,6 +343,7 @@ h2 {
 
 .song img {
 	max-width: 100%;
+	max-height: 350px;
 }
 
 .result-section {
