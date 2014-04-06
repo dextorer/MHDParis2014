@@ -69,7 +69,7 @@ function start() {
 	    		t[i] = 'spotify:track:' + current.spotify_id;
 	    		t[i] = models.Track.fromURI(t[i]);
 	    		s[i] = current.phrase_times * 1000;
-	    		d[i] = current.duration * 1000;
+	    		d[i] = current.duration * 1000 + 100;
 	    		an[i] = current.artist;
 	    		ti[i] = current.title;
 	    		sub[i] = current.subtitle;
@@ -116,7 +116,6 @@ function startSpotyStuff(track, seeks, durations){
 
 			// scroll div
 			var newDivSize = parseInt($('.synced-lyrics').css('margin-top')) - 80;
-			console.log("new size " + newDivSize);
 			$('.synced-lyrics').css("margin-top", newDivSize + "px");
 		}
 
@@ -167,5 +166,10 @@ function stopSpotyStuff(){
 }
 
 function replay() {
+	$('.songs-list').children(':eq(' + (t.length-1) + ')').addClass('blurred');
+	$('.synced-lyrics').children(':eq(' + (t.length-1) + ')').removeClass('selected');
+
+	$('.synced-lyrics').css("margin-top", "0px");
+
 	startSpotyStuff(t,s,d);
 }
