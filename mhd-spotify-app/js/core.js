@@ -17,6 +17,13 @@ var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api2.php';
 var looper = new Array();
 var currentId = 0;
 
+t = new Array();
+s = new Array();
+d = new Array();
+an = new Array();
+ti = new Array();
+sub = new Array();
+ca = new Array();
 
 //Start
 function start() {
@@ -42,14 +49,6 @@ function start() {
 
 	    	var response = $.parseJSON(data);
 	    	var result = response.result;
-	    	
-			t = new Array();
-			s = new Array();
-			d = new Array();
-			an = new Array();
-			ti = new Array();
-			sub = new Array();
-			ca = new Array();
 
 	    	for (var i=0; i<result.length; i++) {
 	    		var token = result[i].token;
@@ -80,7 +79,8 @@ function start() {
 	    		$('.synced-lyrics').append("<p>" + sub[i] + "</p>");
 	    	}
 
-			var song_width = 100 / response.length + '%';
+			var song_width = (100 / result.length) + '%';
+			console.log(song_width);
 			$('.song').css( "width", song_width );
 
 			startSpotyStuff(t,s,d);
@@ -159,4 +159,6 @@ function stopSpotyStuff(){
 	
 }
 
-
+function replay() {
+	startSpotyStuff(t,s,d);
+}
