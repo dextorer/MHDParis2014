@@ -84,9 +84,13 @@ def getTracks(sentence):
 		#print index
 		#print response
 		#try:
-		subtitle_body = response['message']['body']['subtitle']['subtitle_body']
-		#except:
-		#	continue
+		#print response
+		try:
+			subtitle_body = response['message']['body']['subtitle']['subtitle_body']
+		except:
+			print 'stupidstupid'
+			continue
+		
 		try:
 			subtitle_body = ast.literal_eval(subtitle_body)
 		except:
