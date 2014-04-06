@@ -10,7 +10,8 @@ require(['$api/models'], function(myModels) {
 });
 
 //Endpoint
-var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api.php';
+// var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api.php';
+var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api2.php';
 
 //SPOTYPLAYER
 var looper = new Array();
@@ -33,6 +34,8 @@ function start() {
         data: "q=" + query,
         success: function(data){
             
+        	console.log(data);
+
 			// switch content
 			$('.home-section').hide();
 			$('.result-section').show();
@@ -46,6 +49,7 @@ function start() {
 			an = new Array();
 			ti = new Array();
 			sub = new Array();
+			ca = new Array();
 
 	    	for (var i=0; i<result.length; i++) {
 	    		var token = result[i].token;
@@ -70,8 +74,9 @@ function start() {
 	    		an[i] = current.artist;
 	    		ti[i] = current.title;
 	    		sub[i] = current.subtitle;
+	    		ca[i] = current.coverart;
 
-	    		$('.songs-list').append("<div class='song blurred'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
+	    		$('.songs-list').append("<div class='song blurred'><img src=" + ca[i] + " class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
 	    		$('.synced-lyrics').append("<p>" + sub[i] + "</p>");
 	    	}
 
@@ -96,17 +101,19 @@ function startSpotyStuff(track, seeks, durations){
 
 	function SpotyTimed(current){
 
-		if (current > 1) {
+		if (current >= 1) {
 			// update previous
-			$('.songs-list').children(':eq(' + current-1 + ')').removeClass('blurred');
-			$('.synced-lyrics').children(':eq(' + current-1 + ')').removeClass('selected');
+			$('.songs-list').children(':eq(' + (current-1) + ')').addClass('blurred');
+			$('.synced-lyrics').children(':eq(' + (current-1) + ')').removeClass('selected');
 
 			// update current
-			$('.songs-list').children(':eq(' + current + ')').addClass('blurred');
+			$('.songs-list').children(':eq(' + current + ')').removeClass('blurred');
 			$('.synced-lyrics').children(':eq(' + current + ')').addClass('selected');
 
 			// scroll div
-			$('.synced-lyrics').css("margin-top", ($('.synced-lyrics').css("margin-top") - 80));
+			var newDivSize = parseInt($('.synced-lyrics').css('margin-top')) - 80;
+			console.log("new size " + newDivSize);
+			$('.synced-lyrics').css("margin-top", newDivSize + "px");
 		}
 
 		//models.player.stop();
