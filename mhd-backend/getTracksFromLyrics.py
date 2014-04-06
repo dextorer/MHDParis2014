@@ -11,7 +11,11 @@ from os.path import isfile, join
 import ast
 import copy
 import sys
+import requests
+import datetime
+import time
 
+#http://api.decibel.net/v1/tracks?trackTitle=thriller
 #from getLyrics import APISubtitlesMatcher
 verbosity = 0
 outputFile = '/home/neo/code/HackDayParis/sentenceHistoryHack/topicExtractor/output.json'
@@ -28,7 +32,7 @@ def getTracks(sentence):
 	print sentence
 	# build api url
 	url = "http://api.musixmatch.com/ws/1.1/track.search?apikey=b463ed1270b71853d56be5bd776a9b4a"
-	url += "&q_lyrics=" + sent
+	url += "&q_lyrics=" + sent	
 	url += "&quorum_factor=" + str(1)
 	url += "&f_has_lyrics=" + str(1)
 	#url += "&s_artist_rating=" + 'desc'
@@ -84,6 +88,20 @@ def getTracks(sentence):
 		url += "&subtitle_format=mxm"
 		response = json.load( urllib2.urlopen( url ) )
 		
+		#st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d %H:%M:%S')
+
+		#headers = {
+		#	"DecibelAppID" : "88c41b55", 
+		#	"DecibelAppKey": "d03bc6ff966d2165db859479f46a20e7", 
+		#	"DecibelTimeStamp": st}
+		#url = "http://rest.decibel.net/v2/albums"
+		#params = {"ArtistName": "Muse"}
+
+		#r = requests.get(url, headers=headers,params=params)
+		#records = r.json()["ResultSet"]
+		#for record in records:
+		#	print record["Title"]
+		
 		#subtitle_body, response = APISubtitlesMatcher( trackInfo, '0' )
 		#print index
 		#print response
@@ -117,7 +135,9 @@ def getTracks(sentence):
 				cnt += 1
 				txt.append(line['text'])
 				tms.append(line['time']['total'])
-				dur = subtitle_body[idx+1]['time']['total'] - line['time']['total']
+				#print subtitle_body[idx+1]['time']['total'] 
+				#print line['time']['total']
+				dur = float(subtitle_body[idx+1]['time']['total']) - float(line['time']['total'])
 				duration.append(dur)
 			#print idx
 		#print tms
