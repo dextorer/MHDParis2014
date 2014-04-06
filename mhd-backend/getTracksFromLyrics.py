@@ -78,6 +78,7 @@ def getTracks(sentence):
 		trackInfo['spotify_id'] = track['track']['track_spotify_id']
 		trackInfo['mbid'] = track['track']['track_mbid']
 		trackInfo['trackid'] = track['track']['track_id']
+		trackInfo['coverart'] = track['track']['album_coverart_500x500']
 		url = "http://api.musixmatch.com/ws/1.1/track.subtitle.get?apikey=b463ed1270b71853d56be5bd776a9b4a"
 		url += "&track_id=" + str(trackInfo['trackid'])
 		url += "&subtitle_format=mxm"
@@ -138,7 +139,8 @@ def getTracks(sentence):
 	#filehandle = open(outputFile,'w')
 	#json.dump(trackSubtitles, filehandle)
 	#filehandle.close()
-	return (token_result)#,response)
+	#return (track_list_with_subtitles)#,response)
+	return (token_result)
 
 if __name__ == "__main__":
 	os.system("clear")
