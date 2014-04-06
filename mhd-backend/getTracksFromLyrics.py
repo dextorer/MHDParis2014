@@ -153,8 +153,13 @@ if __name__ == "__main__":
 	
 	inargs = cmdParser.parse_args()
 	result = []
-	k = getTracks(inargs.phrase)
-	result.append(k)
+	snt = inargs.phrase
+	snt = snt.split('#')
+	
+	for token in snt:
+		k = getTracks(token)
+		result.append(k)
+	
 	many_tokens_result['result'] = result
 	
 	filehandle = open(outputFile,'w')
