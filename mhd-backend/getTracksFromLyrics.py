@@ -145,7 +145,9 @@ if __name__ == "__main__":
 	many_tokens_result = {}
 	
 	inargs = cmdParser.parse_args()
-	result = getTracks(inargs.phrase)
+	result = []
+	k = getTracks(inargs.phrase)
+	result.append(k)
 	many_tokens_result['result'] = result
 	
 	filehandle = open(outputFile,'w')
