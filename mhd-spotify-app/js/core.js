@@ -10,7 +10,7 @@ require(['$api/models'], function(myModels) {
 });
 
 //Endpoint
-var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/test_response.php';
+var endpoint = 'http://ec2-75-101-233-141.compute-1.amazonaws.com/api.php';
 
 //SPOTYPLAYER
 var looper = new Array();
@@ -20,32 +20,62 @@ var currentId = 0;
 //Start
 function start() {
 	
+	// read data from textarea
+	var query = $('#query_txtarea').val();
+
 	// load spinner
+	$('.listenButton').addClass('loaded').empty().html('Wasting your time..');
 
   	// perform network call
-	$.get(endpoint, function(data,status) {
+	$.get(endpoint + '?q=' + query, function(data,status) {
+
+		// switch content
+		$('.home-section').hide();
+		$('.result-section').show();
+
     	var response = $.parseJSON(data);
     	var result = response.result;
-
+    	
 		t = new Array();
 		s = new Array();
 		d = new Array();
+		an = new Array();
+		ti = new Array();
+		sub = new Array();
 
     	for (var i=0; i<result.length; i++) {
-    		var token_chunk = result[i].token_chunk;
-    		var token_content = result[i].token_content;
+    		var token = result[i].token;
+    		var token_output = result[i].token_output;
     		
-    		t[i] = token_content[0].spotify_id;
+			var current;
+			var found = false;
+
+    		for (var j=0; j<token_output.length && !found; j++) {
+    			current = token_output[j];
+    			if (current.spotify_id) {
+    				console.log("breaking stuff");
+    				found = true;
+    			}
+    		}
+
+    		found = false;
+
+    		t[i] = 'spotify:track:' + current.spotify_id;
     		t[i] = models.Track.fromURI(t[i]);
-    		s[i] = parseInt(token_content[0].start_time);
-    		d[i] = parseInt(token_content[0].duration);
+    		s[i] = current.phrase_times * 1000;
+    		d[i] = current.duration * 1000;
+    		an[i] = current.artist;
+    		ti[i] = current.title;
+    		sub[i] = current.subtitle;
+
+    		$('.songs-list').append("<div class='song blurred'><img src=/cover-art/0c02ccc021d5f1fde006bfd7e61ae144b72b3f11.jpg class='cover' /><div class='overlay-cover'><p class='song-title'>" + ti[i] + "</p><p class='artist-name'>" + an[i] + "</p></div></div>");
+    		$('.synced-lyrics').append("<p>" + sub[i] + "</p>");
     	}
 
-		startSpotyStuff(t,s,d);
+		var song_width = 100 / response.length + '%';
+		$('.song').css( "width", song_width );
 
-		// restore button
-    	// $('#spinner').hide();
-    	// $('#mButton').show();
+		startSpotyStuff(t,s,d);
 
 	},'html');
 }
@@ -80,14 +110,29 @@ function start() {
 
 function startSpotyStuff(track, seeks, durations){
 
+	// removing first song's blur
+	$('.songs-list').children().first().removeClass('blurred');
+	$('.synced-lyrics').children().first().addClass('selected');
+
 	function SpotyTimed(current){
+
+		if (current > 1) {
+			// update previous
+			$('.songs-list').children(':eq(' + current-1 + ')').removeClass('blurred');
+			$('.synced-lyrics').children(':eq(' + current-1 + ')').removeClass('selected');
+
+			// update current
+			$('.songs-list').children(':eq(' + current + ')').addClass('blurred');
+			$('.synced-lyrics').children(':eq(' + current + ')').addClass('selected');
+		}
 
 		//models.player.stop();
 		console.log("Playing " + track[current] + " starting from " + seeks[current]);
 		models.player.stop();
-		models.player.playTrack(track[current]);
-		models.player.seek(seeks[current]);
+		models.player.playTrack(track[current], seeks[current], durations[current]);
+		//models.player.seek(seeks[current]);
 
+		// update current lyrics
 	}	
 
 	stopSpotyStuff();

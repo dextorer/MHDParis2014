@@ -29,10 +29,14 @@ def getTracks(sentence):
 	# build api url
 	url = "http://api.musixmatch.com/ws/1.1/track.search?apikey=b463ed1270b71853d56be5bd776a9b4a"
 	url += "&q_lyrics=" + sent
-	url += "&quorum_factor=" + str(0.9)
+	url += "&quorum_factor=" + str(1)
 	url += "&f_has_lyrics=" + str(1)
-	#url += "&s_track_rating=" + 'asc'
+	#url += "&s_artist_rating=" + 'desc'
+	url += "&s_track_rating=" + 'desc'
 	url += "&f_lyrics_language=" + 'en'
+	url += "&page_size=" + str(100)
+	url += "&page=" + str(1)
+	url += "&g_commontrack=" + str(1)
 	#url +="&q_track=" + track_title
 	#url +="&q_artist=" + track_artist
 	#url +="&q_album=" + track_album
@@ -59,9 +63,12 @@ def getTracks(sentence):
 			track_list_with_subtitles.append(track)
 	#print track_list_with_subtitles
 	
+	print len(track_list_with_subtitles)
 	trackSubtitles = []
 	cnt = 0
-	for idx, track in enumerate(track_list_with_subtitles):
+	
+	for index, track in enumerate(track_list_with_subtitles):
+		
 		trackInfo = {}
 		trackInfo['title'] = track['track']['track_name']
 		trackInfo['artist'] = track['track']['artist_name']
@@ -77,12 +84,31 @@ def getTracks(sentence):
 		response = json.load( urllib2.urlopen( url ) )
 		
 		#subtitle_body, response = APISubtitlesMatcher( trackInfo, '0' )
-		subtitle_body = response['message']['body']['subtitle']['subtitle_body']
-		subtitle_body = ast.literal_eval(subtitle_body)
+		#print index
+		#print response
+		#try:
+		#print response
+		try:
+			subtitle_body = response['message']['body']['subtitle']['subtitle_body']
+		except:
+			print 'stupidstupid'
+			continue
+		
+		try:
+			subtitle_body = ast.literal_eval(subtitle_body)
+		except:
+			print 'stupid'
+			continue
+		#print index
+		
 		tms = []
 		txt = []
 		duration = []
+		#print subtitle_body
 		for idx, line in enumerate(subtitle_body):
+			#print sentence.lower()
+			#print line['text'].lower()
+			#print idx
 			#print sentence.lower()
 			#print line['text'].lower()
 			if sentence.lower() in line['text'].lower():
@@ -92,6 +118,7 @@ def getTracks(sentence):
 				tms.append(line['time']['total'])
 				dur = subtitle_body[idx+1]['time']['total'] - line['time']['total']
 				duration.append(dur)
+			#print idx
 		#print tms
 		if len(tms) == 0:
 			continue
@@ -101,12 +128,17 @@ def getTracks(sentence):
 			print 'error'
 			continue '''
 		trackInfo['subtitle'] = txt[0]
+		#print index
 		trackSubtitles.append(trackInfo)
+	#print 'asd'
 	#print cnt
-	filehandle = open(outputFile,'w')
-	json.dump(trackSubtitles, filehandle)
-	filehandle.close()
-	return (trackSubtitles)#,response)
+	token_result = {}
+	token_result['token'] = sentence
+	token_result['token_output'] = trackSubtitles
+	#filehandle = open(outputFile,'w')
+	#json.dump(trackSubtitles, filehandle)
+	#filehandle.close()
+	return (token_result)#,response)
 
 if __name__ == "__main__":
 	os.system("clear")
@@ -117,12 +149,20 @@ if __name__ == "__main__":
 	
 	cmdParser.add_argument('--phrase', help='Search phrase')
 	#cmdParser.add_argument('--verbose', help='Verbosity level', default=0)
+	many_tokens_result = {}
 	
 	inargs = cmdParser.parse_args()
-	result = getTracks(inargs.phrase)
+	result = []
+	k = getTracks(inargs.phrase)
+	result.append(k)
+	many_tokens_result['result'] = result
+	
+	filehandle = open(outputFile,'w')
+	json.dump(many_tokens_result, filehandle)
+	filehandle.close()
+	
 	#sys.stdout.write(str(result))
 	'''if inargs.folder is None:
 		print "Please specifiy an audio folder"
 		exit();
 	getLyricsMain(inargs)'''
-	
